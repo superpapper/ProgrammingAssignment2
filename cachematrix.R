@@ -1,4 +1,4 @@
-## Following functions create a special 'matrix' object that could cache the inverse
+## Following functions create a special 'matrix' object that could cache the inverse of the 'matrix'
 
 ## 
 
@@ -26,11 +26,13 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-  m <- x$getinverse()
-  if(!is.null(m)) {
+  m <- x$getinverse()  #looking into cache to see the inverse exist or not
+  if(!is.null(m)) {    # if the cache already has value for inverse, then return that value
     message("getting cached data")
     return(m)
   }
+  
+        ## Solve for matrix inverse when there is nothing in the cache
   data <- x$get()
   m <- solve(data, ...)
   x$setinverse(m)
